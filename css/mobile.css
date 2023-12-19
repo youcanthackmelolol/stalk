@@ -1,0 +1,83 @@
+/* mobile.css */
+
+body {
+    margin: 0;
+}
+
+#under-construction {
+    display: block;
+    color: #fff; /* Change text color to white */
+    background: #0d0d0e; /* Set the background color to #0d0d0e */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-shadow: 0 0 5px #ffffff, 0 0 20px #000, 0 0 30px #000;
+}
+
+#under-construction h1 {
+    --fontSize: 60px;
+    --lineHeight: 80px;
+    width: auto;
+    height: calc(2 * var(--lineHeight));
+    line-height: var(--lineHeight);
+    margin: calc(50vh - var(--lineHeight)) auto 0;
+    font-size: var(--fontSize);
+    font-weight: bold; /* Make the text bold */
+    text-transform: uppercase;
+}
+
+#under-construction p {
+    font-size: 2em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text bold */
+    text-transform: uppercase;
+}
+
+#typing {
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text bold */
+    text-transform: uppercase;
+}
+
+*,
+*::after,
+*::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+}
+
+canvas {
+    display: block;
+}
+
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+.raindrop {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    /* Styles for screens up to 600 pixels wide (typical mobile screens) */
+}
