@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>‎ </title> <!-- Initial empty title -->
+    <meta property="og:title" content="stalk.sh" />
+    <meta property="og:description" content="picture perfect" />
+    <meta property="og:url" content="stalk.sh">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/s/31977/Minecraftia.woff" as="font" type="font/woff" crossorigin="anonymous"> <!-- Added Minecraftia font -->
+    <link rel="stylesheet" href="css/a9420aga032ca.css">
+    <link rel="shortcut icon" type="image/png" href="https://cdn.discordapp.com/emojis/1150451394554380319.gif?size=96&quality=lossless">
+    <meta name="theme-color" content="#303135">
+    <style>
+        @font-face {
+            font-family: 'Minecraftia';
+            font-style: normal;
+            font-weight: 200;
+            src: url('https://fonts.cdnfonts.com/s/31977/Minecraftia.woff') format('woff'); /* Link to the Minecraftia font */
+        }
+        body {
+            font-family: 'Minecraftia', sans-serif; /* Set font to Minecraftia */
+            margin: 0;
+            cursor: url('https://cdn.discordapp.com/attachments/1146070422606057474/1155441506996461640/White_Crosshair_Cursor.cur') 16 16, auto !important;
+            overflow: hidden; /* Prevent overflow */
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black; /* Set background to black */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            transition: opacity 1s ease; /* Fade effect */
+            z-index: 10; /* Ensure it is above other content */
+        }
+        .main-content {
+            display: none; /* Hide main content initially */
+            height: 100vh; /* Full viewport height */
+            background: black;
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+        .header {
+            display: flex; /* Use flexbox */
+            align-items: center; /* Center items vertically */
+            justify-content: space-between; /* Space items evenly */
+            position: absolute; /* Position at the top */
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
+            width: calc(100% - 40px); /* Full width minus padding */
+        }
+        .nav {
+            display: flex; /* Use flexbox for nav links */
+            gap: 15px; /* Space between links */
+        }
+        .nav a {
+            color: white; /* Link color */
+            text-decoration: none; /* Remove underline */
+            font-size: 16px; /* Font size */
+            padding: 5px 10px; /* Padding for clickable area */
+            border-radius: 5px; /* Rounded corners */
+            transition: background 0.3s; /* Smooth background transition */
+        }
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2); /* Background on hover */
+        }
+        .music-button {
+            background: transparent; /* Make background transparent */
+            border: none; /* No border */
+            border-radius: 50%; /* Make the button round */
+            color: white; /* Icon color */
+            padding: 10px; /* Padding for clickable area */
+            cursor: pointer; /* Change cursor to pointer */
+            transition: background 0.3s; /* Smooth background transition */
+            width: 50px; /* Set width for round shape */
+            height: 50px; /* Set height for round shape */
+            display: flex; /* Center icon */
+            align-items: center; /* Center icon vertically */
+            justify-content: center; /* Center icon horizontally */
+        }
+        .music-button:hover {
+            background: rgba(255, 255, 255, 0.2); /* Change background on hover */
+        }
+        .container {
+            position: relative; /* Keep it relative for pseudo-element */
+            text-align: center; /* Center text */
+            border-radius: 15px; /* Rounded corners */
+            padding: 30px; /* Add padding for spacing */
+            width: 300px; /* Restore previous width */
+            height: auto; /* Auto height */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            animation: floatRotate 6s ease-in-out infinite; /* Apply floating and rotating animation */
+            overflow: hidden; /* Prevent overflow from pseudo-element */
+        }
+        @keyframes floatRotate {
+            0% { transform: translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
+            20% { transform: translateY(-15px) rotateY(15deg) rotateX(10deg) rotateZ(5deg); } /* Move up and tilt */
+            40% { transform: translateY(0) rotateY(-10deg) rotateX(5deg) rotateZ(-5deg); } /* Move back down */
+            60% { transform: translateY(15px) rotateY(10deg) rotateX(-10deg) rotateZ(10deg); } /* Move down and tilt */
+            80% { transform: translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); } /* Return to original */
+            100% { transform: translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); } /* Final position */
+        }
+        .pfp-image {
+            border-radius: 100%;
+            width: 165px;
+            height: 165px;
+            object-fit: cover;
+            border: 5px solid transparent;
+        }
+        .username {
+            font-size: 21px;
+            font-weight: 700;
+            position: relative; /* Position relative for tooltip */
+            font-family: 'Minecraftia', sans-serif; /* Set font to Minecraftia for username */
+        }
+        .bio-text {
+            font-size: 14px;
+            color: white;
+            margin: 10px 0; /* Add margin for spacing */
+            font-family: 'Minecraftia', sans-serif; /* Set font to Minecraftia for bio text */
+        }
+        .badge {
+            position: relative; /* Position relative for tooltip */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+        .badge-tooltip {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: transparent;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px; /* Rounded corners */
+            font-size: 14px;
+            top: -40px; /* Position above the badge */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center adjustment */
+            white-space: nowrap; /* Prevent text wrapping */
+            z-index: 10; /* Ensure it appears above other elements */
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition */
+        }
+        .badge:hover .badge-tooltip {
+            display: block; /* Show tooltip on hover */
+            opacity: 1; /* Fade in */
+            transform: translate(-50%, -10px); /* Move up slightly */
+        }
+        .socials {
+            margin-top: 10px; /* Add margin for spacing */
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="kira1" loop playsinline>
+        <source src="songs/4.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <div class="overlay" id="overlay">
+        [ click ]
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <button class="music-button" id="musicButton">
+                <i class="fa-solid fa-volume-high" id="musicIcon"></i> <!-- Default icon -->
+            </button>
+
+            <div class="nav">
+                <a href="index.html">Home</a>
+                <a href="https://discord.gg/hurry" target="_blank">Discord</a>
+            </div>
+        </div>
+
+        <div class="container" id="blurBox">
+            <img class="pfp-image" src="images/4.gif" alt="pfp">
+            <p class="username">
+                <span class="sparkle">jeremiah</span>
+                <span class="badge">
+                    <img class="badge" src="https://cdn.discordapp.com/emojis/1306013695947833386.webp?size=96">
+                    <span class="badge-tooltip">Staff</span> <!-- Tooltip for badge -->
+                </span>
+            </p>
+            <p class="bio-text">🧛🏿’d out</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var audioElement = document.getElementById("kira1");
+        var musicButton = document.getElementById("musicButton");
+        var musicIcon = document.getElementById("musicIcon");
+        var overlay = document.getElementById("overlay");
+        var mainContent = document.getElementById("mainContent");
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+
+        // Set initial volume
+        audioElement.volume = 0.2; // Set the volume to a value between 0 and 1 (e.g., 0.2 for 20% volume)
+
+        // Function to toggle mute/unmute
+        musicButton.addEventListener("click", function() {
+            if (audioElement.muted) {
+                audioElement.muted = false; // Unmute
+                musicIcon.classList.remove("fa-volume-xmark"); // Change icon to unmute
+                musicIcon.classList.add("fa-volume-high");
+            } else {
+                audioElement.muted = true; // Mute
+                musicIcon.classList.remove("fa-volume-high"); // Change icon to mute
+                musicIcon.classList.add("fa-volume-xmark");
+            }
+        });
+
+        // Click event for overlay
+        overlay.addEventListener("click", function() {
+            audioElement.play(); // Start playing music
+            overlay.style.opacity = '0'; // Fade out overlay
+            setTimeout(function() {
+                overlay.style.display = 'none'; // Hide overlay after fade out
+                mainContent.style.display = 'flex'; // Show main content
+            }, 1000); // Match the timeout with the CSS transition duration
+        });
+
+        // Typing effect for the page title
+        const titleText = "@rico"; // The title text to type
+        let titleIndex = 0;
+        let isDeleting = false; // Flag to check if we are deleting
+
+        function typeTitle() {
+            if (isDeleting) {
+                // Remove one character
+                document.title = titleText.substring(0, titleIndex);
+                titleIndex--;
+                if (titleIndex < 1) { // Stop at '@'
+                    isDeleting = false; // Switch to typing mode
+                    setTimeout(typeTitle, 500); // Wait before starting to type again
+                } else {
+                    setTimeout(typeTitle, 100); // Speed of deleting
+                }
+            } else {
+                // Add one character
+                document.title = titleText.substring(0, titleIndex + 1);
+                titleIndex++;
+                if (titleIndex > titleText.length) {
+                    isDeleting = true; // Switch to deleting mode
+                    setTimeout(typeTitle, 500); // Wait before starting to delete
+                } else {
+                    setTimeout(typeTitle, 200); // Speed of typing
+                }
+            }
+        }
+
+        // Start the typing effect
+        typeTitle();
+    </script>
+</body>
+</html>
